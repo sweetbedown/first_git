@@ -2,17 +2,21 @@
 
 using namespace std;
 
-int fib(int x){
-    if (x==1) return 0;
-    if (x==2) return 1;
-    if (x>2) return (fib(x-2)+fib(x-1));
-}
-
 int main()
 {
-    int a;
-    cin >> a;
-    cout << fib(a) << endl;
-
+    int x, a = 0, b = 1;
+    cin >> x;
+    int chislo = 0;
+    for (int i = 0; i<x;i++){
+        if (i<2){
+            cout << i << endl;
+        }
+        else{
+            chislo = a + b;
+            cout << chislo << endl;
+            a = b;
+            b = chislo;
+        }
+    }
     return 0;
 }
