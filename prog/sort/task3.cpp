@@ -65,7 +65,7 @@ void bubble(vector<people>& vec) {
 
 			}
 			else {
-				if ((vec[j - 1].post == vec[j].post)&&(vec[j - 1].qual > vec[j].qual)) {
+				if ((vec[j - 1].post == vec[j].post) && (vec[j - 1].qual > vec[j].qual)) {
 
 					swap(vec[j - 1], vec[j]);
 

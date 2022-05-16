@@ -10,7 +10,7 @@ using namespace std;
 ifstream in("input1.txt");
 ofstream out("output1.txt");
 
-struct date{
+struct date {
 	int dd, mm, yy;
 };
 
@@ -54,7 +54,7 @@ void print(people x) {//גûגמה ג פאיכ
 	out << x.name << " " << x.post << " " << x.d_b.dd << " " << x.d_b.mm << " " << x.d_b.yy << " " << x.qual << " " << x.salary << endl;
 }
 
-vector<people> gap_sort(vector<people>&x) {
+vector<people> gap_sort(vector<people>& x) {
 	int N = 20;
 	double gap;
 	gap = N / 1.247;
