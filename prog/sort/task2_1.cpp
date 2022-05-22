@@ -1,75 +1,56 @@
+// 1 Солбцы по возрастанию с помощью быстрой сортировки
 #include <iostream>
+#include <algorithm>
 #include <fstream>
-#include <string>
-#include <vector>
-#include<algorithm>
 
 using namespace std;
 
-ifstream in("main3.txt");
-ofstream out("main1.txt");
+ifstream in("input.txt");
+ofstream out("output.txt");
+int n = 4;
 
-vector<vector<int>> inFile() {
-	vector<vector<int>> x;
-	int g = 5;
-	x.resize(g);
-	for (int j = 0; j < g; j++) {
-		x.resize(g);
-	}
-	int a;
-	while (in.peek() != EOF) {
-		for (int i = 0; i < g; i++) {
-			for (int j = 0; j < g; j++) {
-				in >> a;
-				x[i][j] = a;
-			}
-		}
-	}
-	return x;
+int** inFile()//Ввод из файла
+{ 
+    int** mas = new int* [n];
+    for (int i = 0; i < n; i++)
+        mas[i] = new int[n];
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            in >> mas[j][i];
+    return mas;
 }
 
-vector<vector<int>> sort(vector<vector<int>>&a,int nach, int n) {
-	int left, right, centr;
-	for (int i = 0; i < n; i++) {
-		left = nach;
-		right = n-1;
-		centr = (n/2)+1;
-		while (left <= right) {
-			while (a[i][left] < a[i][centr]) {
-				left++;
-			}
-			while (a[i][right] > a[i][centr]) {
-				right--;
-			}
-			if (left <= right) {
-				swap(a[i][left], a[i][right]);
-				right--; left++;
-			}
-		}
-		vector <int>b;
-		for (int d = 0; d < centr; d++) {
-			b.push_back(a[i][d]);
-		}
-		vector <int>q;
-		for (int d = n-1; d > centr; d--) {
-			q.push_back(a[i][d]);
-		}
-		if (b.size() > 1) sort(a,nach,right);
-		if (q.size() > 1) sort(a,left,n);
-	}
-	return a;
+void sort(int* mas, int first, int last)
+{
+    int mid, count;
+    int f = first, l = last; // Левая и правая граница
+    mid = mas[(f + l) / 2]; //Опорный элемента
+    while (f < l) {
+        while (mas[f] < mid) f++;
+        while (mas[l] > mid) l--;
+        if (f <= l) {
+            swap(mas[l], mas[f]);
+            f++; l--;
+        }
+    }
+    if (first < l)
+        sort(mas, first, l);
+    if (f < last)
+        sort(mas, f, last);
 }
 
-int main() {
-	vector<vector<int>> x;
-	int N = 5;
-	x = inFile();
-	x = sort(x, 0, N);
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
-			cout << x[i][j] << ' ';
-		}
-		cout << endl;
-	}
-	return 0;
+
+
+void OutFile(int**& mas){ //Вывод в файл
+    for (int j = 0; j < n; j++, out << endl)
+        for (int i = 0; i < n; i++)
+            out << mas[i][j] << " ";
+}
+
+int main(){
+    int** mas = inFile();
+    for (int i = 0; i < n; i++)
+        sort(mas[i], 0, n - 1);
+    OutFile(mas);
+    return 0;
 }
