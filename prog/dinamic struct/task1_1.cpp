@@ -31,13 +31,18 @@ void reverse(stack*& h) {
 	h = h1;
 }
 
+bool func(char x) {
+	if (x == 'a' || x == 'u' || x == 'e' || x == 'i' || x == 'o' || x == 'y') return true;
+	else return false;
+}
+
 stack* F(stack*& steck) {
 	string a = "eyuioa";
 	stack* GlSteck = NULL;
 	stack* SglSteck = NULL;
 	while (steck) {
 		char x = pop(steck);
-		if (a.find(x)) {
+		if (func(x)) {
 			push(GlSteck, x);
 		}
 		else {
